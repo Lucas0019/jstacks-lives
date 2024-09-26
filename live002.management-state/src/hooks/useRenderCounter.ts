@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function useRenderCounter(componentName: string) {
   const counter = useRef(0);
 
