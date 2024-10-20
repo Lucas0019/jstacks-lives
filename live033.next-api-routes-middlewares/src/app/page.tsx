@@ -14,26 +14,13 @@ import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Edit2Icon, PlusCircleIcon, Trash2Icon } from 'lucide-react';
 import Link from 'next/link';
+import { db } from '@/lib/db';
 
-const contacts = [
-  {
-    id: String(Math.random()),
-    name: 'Contact',
-    email: 'contact@jstack.com.br',
-  },
-  {
-    id: String(Math.random()),
-    name: 'Contact',
-    email: 'contact@jstack.com.br',
-  },
-  {
-    id: String(Math.random()),
-    name: 'Contact',
-    email: 'contact@jstack.com.br',
-  },
-];
 
-export default function Home() {
+export default async function Home() {
+
+  const contacts = await db.contact.findMany();
+
   return (
     <>
       <header className="flex items-center justify-between">

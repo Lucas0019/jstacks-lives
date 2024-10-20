@@ -1,8 +1,39 @@
+'use client';
+
+import { useRouter } from 'next/navigation';
 import { ContactForm } from '@/components/ContactForm';
 import { ArrowLeftIcon } from 'lucide-react';
 import Link from 'next/link';
 
+interface IDataSubmitProps {
+  name: string;
+  email: string;
+}
+
 export default function CreateContactPage() {
+  const router = useRouter();
+
+  const handleSubmit = async ({ name, email }: IDataSubmitProps) => {
+    try {
+      const response = await fetch('/api/contacts', {
+        method: 'POST',
+        body: JSON.stringify({ name, email }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (response.ok) {
+        router.push('/');
+        router.refresh();
+      } else {
+        console.error('Failed to create contact');
+      }
+    } catch (error) {
+      console.error('An error occurred', error);
+    }
+  };
+
   return (
     <>
       <header>
@@ -18,7 +49,7 @@ export default function CreateContactPage() {
         </h1>
       </header>
 
-      <ContactForm />
+      <ContactForm onSubmit={handleSubmit} />
     </>
   );
 }

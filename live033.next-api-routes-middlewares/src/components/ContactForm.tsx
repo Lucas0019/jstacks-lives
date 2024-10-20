@@ -16,11 +16,14 @@ interface IContactFormProps {
   }) => void;
 }
 
-export function ContactForm({ contact, onSubmit }: IContactFormProps) {
+export function ContactForm({ contact, onSubmit }: Readonly<IContactFormProps>) {
   const [name, setName] = useState(contact?.name ?? '');
   const [email, setEmail] = useState(contact?.email ?? '');
 
-  function handleSubmit() {
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+
+    event.preventDefault();
+
     onSubmit?.({ name, email });
   }
 
