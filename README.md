@@ -5,3 +5,5 @@
 - Live 002: Construindo um Gerenciador de Estados do zero com React
 
 - Live 010: Entendendo e Trabalhando com o Next.js
+
+- Live 033: Api Routes, Middlewares e Server Actions no Next.js
