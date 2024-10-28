@@ -9,3 +9,5 @@
 - Live 032: Novas funcionalidades do React 19
 
 - Live 033: Api Routes, Middlewares e Server Actions no Next.js
+
+- Live 034: React Server Actions no Next.js
