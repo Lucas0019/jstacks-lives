@@ -1,25 +1,61 @@
-'use client'
-
 import { ContactForm } from '@/components/ContactForm';
+import { db } from '@/lib/db';
+import { sleep } from '@/lib/utils';
+import { ActionResponse } from '@/types/ActionResponse';
 import { ArrowLeftIcon } from 'lucide-react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { z } from 'zod';
 
-export default function CreateContactPage() {
-  const router = useRouter()
+const schema = z.object({
+  name: z.string().min(1, 'Nome é obrigatório'),
+  email: z.string().email('Informe um e-mail válido!'),
+});
 
-  async function handleSubmit(data: { name: string; email: string }) {
-    await fetch('/api/contacts', {
-      method: 'POST',
-      body: JSON.stringify(data),
-      headers: {
-        'Content-Type': 'application/json',
+async function submitAction(formData: FormData): Promise<ActionResponse> {
+  'use server';
+
+  const data = Object.fromEntries(formData);
+  const parsedData = schema.safeParse(data);
+
+  if (!parsedData.success) {
+    return {
+      status: 'error',
+      body: {
+        message: parsedData.error.issues.map(issue => issue.message),
       },
-    });
-
-    router.push('/');
+    };
   }
 
+  const { email, name } = parsedData.data;
+
+  const existingContact = await db.contact.findUnique({
+    where: { email },
+  });
+
+  if (existingContact) {
+    return {
+      status: 'error',
+      body: {
+        message: ['E-mail já existe!'],
+      },
+    };
+  }
+
+  await sleep();
+  const contact = await db.contact.create({
+    data: {
+      name,
+      email,
+    },
+  });
+
+  return {
+    status: 'success',
+    body: { contact },
+  };
+}
+
+export default function CreateContactPage() {
   return (
     <>
       <header>
@@ -35,9 +71,7 @@ export default function CreateContactPage() {
         </h1>
       </header>
 
-      <ContactForm
-        onSubmit={handleSubmit}
-      />
+      <ContactForm submitAction={submitAction} />
     </>
   );
 }
