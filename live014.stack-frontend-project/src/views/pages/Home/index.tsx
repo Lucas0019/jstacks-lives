@@ -1,7 +1,13 @@
-import React from 'react'
+import { Button } from "@views/components/ui/button";
+import { Input } from "@views/components/ui/input";
 
-export const Home = () => {
+export function Home() {
   return (
-    <div>Home</div>
-  )
+    <div>
+      <Input placeholder="Submit" />
+      <Button>
+        Enviar
+      </Button>
+    </div>
+  );
 }

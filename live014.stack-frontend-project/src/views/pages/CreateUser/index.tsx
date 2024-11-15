@@ -1,7 +1,5 @@
-import React from 'react'
-
-export const CreateUser = () => {
+export function CreateUser() {
   return (
     <div>CreateUser</div>
-  )
+  );
 }

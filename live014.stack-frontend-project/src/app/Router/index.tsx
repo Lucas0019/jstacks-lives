@@ -1,14 +1,19 @@
-import React from "react";
-import { Routes, Route } from "react-router-dom";
-import { Home } from "@/views/pages/Home";
-import { CreateUser } from "@/views/pages/CreateUser";
-import { routes } from './routes';
+import { Suspense } from 'react';
+import { Route, Routes } from "react-router-dom";
 
-export const Router = () => {
+import { lazyLoad } from '@app/utils/lazyLoad';
+import { routes } from "./routes";
+
+const { Home } = lazyLoad(() => import('@views/pages/Home'));
+const { CreateUser } = lazyLoad(() => import('@views/pages/CreateUser'));
+
+export function Router() {
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path={routes.createUser} element={<CreateUser />} />
-    </Routes>
+    <Suspense fallback={<div className="w-10 h-10 rounded-full border-4 border-r-white animate-spin" />}>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path={routes.createUser} element={<CreateUser />} />
+      </Routes>
+    </Suspense>
   );
-};
+}
