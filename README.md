@@ -6,6 +6,8 @@
 
 - Live 010: Entendendo e Trabalhando com o Next.js
 
+- Live 013: React Query na prática
+
 - Live 014: A melhor stack para criar frontends
 
 - Live 032: Novas funcionalidades do React 19
