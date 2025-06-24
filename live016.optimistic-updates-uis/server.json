@@ -1,21 +1,15 @@
 {
   "users": [
     {
-      "id": "2",
-      "blocked": true,
-      "name": "Gabrielle Zanellato",
-      "username": "gabizanellato"
-    },
-    {
-      "id": "3",
-      "blocked": false,
-      "name": "Othon Medeiros",
-      "username": "othonsm"
-    },
-    {
       "id": "e0ab",
-      "blocked": true,
+      "blocked": false,
       "name": "Lucas Xavier",
+      "username": "Lucas0019"
+    },
+    {
+      "id": "20d1",
+      "blocked": false,
+      "name": "Lucas dos Santos Xavier",
       "username": "Lucas0019"
     }
   ]

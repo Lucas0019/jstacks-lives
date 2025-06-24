@@ -7,10 +7,9 @@ import { Switch } from './ui/Switch';
 
 export const UsersList = () => {
   const { users, isLoading } = useUsers();
-  const { updateUser} = useUpdateUser();
+  const { updateUser } = useUpdateUser();
 
-  const handleBlockedChange = async  (id: string, blocked: boolean) => {
-    // console.log('blocked', checked);
+  const handleBlockedChange = async (id: string, blocked: boolean) => {
     await updateUser({ id, blocked });
   };
 
@@ -50,8 +49,10 @@ export const UsersList = () => {
 
           <div className="flex items-center gap-4">
             <Switch
-              // checked={user.blocked}
-              onCheckedChange={(checked) => handleBlockedChange(user.id, checked)}
+              checked={user.blocked}
+              onCheckedChange={(checked) =>
+                handleBlockedChange(user.id, checked)
+              }
             />
           </div>
         </div>
