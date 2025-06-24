@@ -1,4 +1,7 @@
-# jstacks-lives
+# JStacks Lives
+
+![image](https://github.com/user-attachments/assets/bb67a2f4-1636-4bc7-a8fb-78a12d631273)
+
 
 - Live 001: Entendendo a estrutura de tokens JWT criando a sua própria implementação
 
